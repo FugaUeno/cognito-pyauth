@@ -1,0 +1,28 @@
+{
+  "name": "cognito-pyauth",
+  "workspaceFolder": "/root/app",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "service": "app",
+  "settings": {
+    "python.defaultInterpreterPath": ".venv/bin/python3.9",
+    "python.autoComplete.extraPaths": [
+      ".venv/lib/python3.9/site-packages"
+    ],
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.lintOnSave": true,
+    "python.formatting.provider": "black",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
+  },
+  "extensions": [
+    "editorconfig.editorconfig",
+    "eamodio.gitlens",
+    "ms-python.python",
+  ]
+}

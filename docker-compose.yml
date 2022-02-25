@@ -1,0 +1,8 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    tty: true
+    volumes:
+      - .:/root/app

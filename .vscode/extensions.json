@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "eamodio.gitlens",
+    "ms-vscode-remote.remote-containers"
+  ]
+}
