@@ -13,6 +13,12 @@ def lint(c, path="app"):
 
 
 @task
+def build(c):
+    """ビルド"""
+    run("poetry build")
+
+
+@task
 def clear(c, all=False, mypy=False, pytest=False):
     """キャッシュを削除"""
     caches = ["__pycache__"]
