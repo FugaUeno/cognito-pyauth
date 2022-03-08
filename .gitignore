@@ -3,5 +3,7 @@ __pycache__
 .mypy_cache
 .coverage
 
+dist
+
 .env.test
 .venv
