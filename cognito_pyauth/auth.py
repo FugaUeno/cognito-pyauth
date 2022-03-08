@@ -89,29 +89,20 @@ class Auth:
         self,
         username: str,
         password: str,
-    ) -> schemas.AuthenticationResult:
+    ) -> Dict[str, Any]:
         req = schemas.SignupRequest(
             username=username,
             password=password,
         )
 
         try:
-            res = self.client.sign_up(
+            return self.client.sign_up(
                 Username=req.username,
                 Password=req.password.get_secret_value(),
                 ClientId=self.config.client_id,
             )
         except self.client.exceptions.UsernameExistsException as e:
             raise exceptions.UsernameExistsException(e)
-
-        result = res["AuthenticationResult"]
-        return schemas.AuthenticationResult(
-            access_token=result["AccessToken"],
-            id_token=result["IdToken"],
-            refresh_token=result["RefreshToken"],
-            token_type=result["TokenType"],
-            expires_in=result["ExpiresIn"],
-        )
 
     def confirm_signup(
         self,
@@ -138,4 +129,22 @@ class Auth:
         return self.client.resend_confirmation_code(
             Username=req.username,
             ClientId=self.config.client_id,
+        )
+
+    def delete_user(
+        self,
+        username: str,
+        password: str,
+    ) -> Dict[str, Any]:
+        res = self.login(username, password)
+        return self.client.delete_user(
+            AccessToken=res.access_token,
+        )
+
+    def delete_user_by_access_token(
+        self,
+        access_token: str,
+    ) -> Dict[str, Any]:
+        return self.client.delete_user(
+            AccessToken=access_token,
         )

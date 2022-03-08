@@ -37,6 +37,7 @@ def test(c, all=False, file="", duration=False, coverage=False, init=False):
         "poetry run pytest",
         f"tests/app/{file}",
         "--log-cli-level=DEBUG",
+        "-s",
     ]
     if all or duration:
         cmd.append("--durations=0 -vv")
