@@ -25,6 +25,13 @@ class AuthenticationResult(BaseModel):
     expires_in: int = Field(title="トークンが有効な秒数")
 
 
+class RefreshTokenResult(BaseModel):
+    access_token: str = Field(title="アクセストークン")
+    id_token: str = Field(title="IDトークン")
+    token_type: str = Field(title="トークンタイプ")
+    expires_in: int = Field(title="トークンが有効な秒数")
+
+
 class SignupRequest(BaseModel):
     username: str = Field(title="ユーザー名")
     password: SecretStr = Field(title="パスワード", min_length=4)
@@ -48,3 +55,7 @@ class ConfirmSignupRequest(BaseModel):
 
 class ResendConfirmationCodeRequest(BaseModel):
     username: str = Field(title="ユーザー名")
+
+
+class TokenRefreshRequest(BaseModel):
+    refresh_token: str = Field(title="更新トークン")

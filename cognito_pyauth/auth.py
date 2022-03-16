@@ -148,3 +148,24 @@ class Auth:
         return self.client.delete_user(
             AccessToken=access_token,
         )
+
+    def refresh_token(
+        self,
+        refresh_token: str,
+    ) -> schemas.RefreshTokenResult:
+        req = schemas.TokenRefreshRequest(refresh_token=refresh_token)
+
+        res = self.client.initiate_auth(
+            AuthFlow="REFRESH_TOKEN_AUTH",
+            AuthParameters={
+                "REFRESH_TOKEN": req.refresh_token,
+            },
+            ClientId=self.config.client_id,
+        )
+        result = res["AuthenticationResult"]
+        return schemas.RefreshTokenResult(
+            access_token=result["AccessToken"],
+            id_token=result["IdToken"],
+            token_type=result["TokenType"],
+            expires_in=result["ExpiresIn"],
+        )
