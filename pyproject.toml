@@ -1,17 +1,17 @@
 [tool.poetry]
 name = "cognito-pyauth"
-version = "1.3.0"
+version = "1.3.1"
 description = ""
 readme = "README.md"
 authors = ["fuuga"]
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0"
-requests = "2.27.1"
-PyJWT = {extras = ["crypto"], version = "2.3.0"}
+requests = "^2.27.1"
+PyJWT = {extras = ["crypto"], version = "^2.3.0"}
 pydantic = "^1.9.0"
-fastapi = "0.75.2"
-boto3 = "1.21.46"
+fastapi = "^0.76.0"
+boto3 = "^1.22.9"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.930"
