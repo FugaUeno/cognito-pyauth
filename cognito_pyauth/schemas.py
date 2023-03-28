@@ -1,9 +1,10 @@
+from typing import Optional
 from pydantic import BaseModel, Field, SecretStr, validator
 
 
 class Payload(BaseModel):
     sub: str
-    email_verified: bool
+    email_verified: Optional[bool]
     iss: str
     username: str
     origin_jti: str
@@ -14,7 +15,8 @@ class Payload(BaseModel):
     exp: str
     iat: str
     jti: str
-    email: str
+    email: Optional[str]
+    preferred_username: Optional[str]
 
 
 class AuthenticationResult(BaseModel):
