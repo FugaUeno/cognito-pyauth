@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, SecretStr, field_validator, ConfigDict
 
 class Payload(BaseModel):
     sub: str
-    email_verified: Optional[bool]
+    email_verified: Optional[bool] = None
     iss: str
     username: str
     origin_jti: str
@@ -15,7 +15,7 @@ class Payload(BaseModel):
     exp: str
     iat: str
     jti: str
-    email: Optional[str]
+    email: Optional[str] = None
     preferred_username: Optional[str] = None
 
     model_config = ConfigDict(coerce_numbers_to_str=True)
