@@ -45,7 +45,7 @@ class Config:
     def get_public_key(self, kid: str) -> str:
         for key in self.public_keys:
             if key.kid == kid:
-                return jwt.algorithms.RSAAlgorithm.from_jwk(key.json())
+                return jwt.algorithms.RSAAlgorithm.from_jwk(key.model_dump_json())
         else:
             raise Exception("not found public key")
 

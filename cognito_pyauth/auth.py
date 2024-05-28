@@ -7,6 +7,7 @@ from fastapi import Depends
 from cognito_pyauth import exceptions, schemas
 from cognito_pyauth.config import Config
 from cognito_pyauth.utils import get_api_token
+from cognito_pyauth.logger import logger
 
 
 class Auth:
@@ -40,7 +41,8 @@ class Auth:
                 **decoded,
                 username=decoded["cognito:username"],
             )
-        except Exception:
+        except Exception as e:
+            logger.info(e)
             raise exceptions.NotAuthorizedException()
 
     def get_payload_depends(

@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, Field, SecretStr, validator
+from pydantic import BaseModel, Field, SecretStr, field_validator, ConfigDict
 
 
 class Payload(BaseModel):
@@ -16,7 +16,9 @@ class Payload(BaseModel):
     iat: str
     jti: str
     email: Optional[str]
-    preferred_username: Optional[str]
+    preferred_username: Optional[str] = None
+
+    model_config = ConfigDict(coerce_numbers_to_str=True)
 
 
 class AuthenticationResult(BaseModel):
@@ -48,7 +50,7 @@ class ConfirmSignupRequest(BaseModel):
     username: str = Field(title="ユーザー名")
     confirmation_code: str = Field(title="検証コード", min_length=6, max_length=6)
 
-    @validator("confirmation_code")
+    @field_validator("confirmation_code")
     def confirmation_code_validator(cls, v: str) -> str:
         if not v.isnumeric():
             raise ValueError("検証コードは6桁の数字です")
